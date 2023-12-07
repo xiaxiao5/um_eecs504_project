@@ -1,0 +1,22 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<div>Image 1 clicks: <span id="image_1_coords_click"></span><div id="image_1_coords_now"> </div></div>
+<img id="image_1" src="dat/F-PHAB/F-PHAB_media_v000/Video_files/Subject_1/close_juice_bottle/2/color/0000000001/full_scale.jpg">
+<script type="text/javascript">
+  var img = new Image();
+  img.onload = function() {
+    var img_width = this.width;
+    var img_height = this.height;
+    $('#image_1').mousemove( function(event) {
+      window.current_x = Math.round(event.pageX - $('#image_1').offset().left);
+      window.current_y = Math.round(event.pageY - $('#image_1').offset().top);
+      window.current_coords = (window.current_x / img_width).toFixed(2) + ', ' + (window.current_y / img_height).toFixed(2);
+      $('#image_1_coords_now').html('Current: ' + window.current_coords + '.');
+    }).mouseleave( function() {
+      $('#image_1_coords_now').html(' ');
+    }).click( function() {
+      $('#image_1_coords_click').html($('#image_1_coords_click').html() + 
+      "(" + window.current_coords + ") ");
+    });
+  };
+  img.src = $('#image_1').attr('src');
+</script>
